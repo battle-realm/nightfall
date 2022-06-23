@@ -1,0 +1,92 @@
+swagger: "2.0"
+info:
+  description: "Tổ chức tội phạm cầm đầu bởi Nightfall. Các hoạt động phạm tội thường diễn ra vào ban đêm và qua mặt pháo sáng của hệ thống an ninh. Nói chung là cũng sợ."
+  version: "007"
+  title: "Đặc vụ Nightfall"
+
+host: "localhost:5000"
+basePath: "/"
+
+schemes:
+- "http"
+
+paths:
+  /:
+    post:
+      tags:
+      - "pet"
+      summary: "Gửi danh sách các yêu cầu bypass."
+      description: ""
+      operationId: "addPet"
+      consumes:
+      - "application/json"
+      - "*"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Danh sách các yêu cầu bypass."
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/RequestInfo"
+          example:
+            - id: "10"
+              method: "GET"
+              url: "https://google.com"
+            - id: "11"
+              method: "POST"
+              url: "https://google.com"
+              post_data: "{piarce}"
+          
+      responses:
+        "200":
+          description: "Lấy các nội dung bypass thành công."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ResponseInfo"
+            example:
+              - id: "10"
+                response: "<!DOCTYPE html>..."
+              - id: "11"
+                respones: "405 (Method Not Allowed)"
+    
+        
+definitions:
+  RequestInfo:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "int64"
+      url:
+        type: "string"
+      
+      method:
+        type: "string"
+        description: "HTTP method"
+        enum:
+        - "GET"
+        - "POST"
+      post_data:
+        type: "string"
+        description: "HTTP POST body"
+        default: ""
+    xml:
+      name: "RequestInfo"
+      
+  ResponseInfo:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "int64"
+        description: "id from RequestInfo"
+      response:
+        type: "string"
+        description: "Response data"
+    xml:
+      name: "ResponseInfo"

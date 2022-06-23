@@ -1,0 +1,21 @@
+version: '3.6'
+services:
+  nightfall:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nightfall-agent
+    restart: always
+    ports:
+      - "5000:5000"
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+
+    healthcheck:
+      test: netstat -ltn | grep -c 5000
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 2s
