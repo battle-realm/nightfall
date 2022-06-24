@@ -28,10 +28,12 @@ Response example:
        "[
           {
             "id": "10",
+            "status_code": 200,
             "response": "<!DOCTYPE html>..."
           },
           {
             "id": "11",
+            "status_code": 405,
             "respones": "405 (Method Not Allowed)"
           }
         ]

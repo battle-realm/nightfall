@@ -50,8 +50,10 @@ paths:
               $ref: "#/definitions/ResponseInfo"
             example:
               - id: "10"
+                status_code: 200
                 response: "<!DOCTYPE html>..."
               - id: "11"
+                status_code: 405
                 respones: "405 (Method Not Allowed)"
     
         
@@ -85,6 +87,9 @@ definitions:
         type: "string"
         format: "int64"
         description: "id from RequestInfo"
+      status_code:
+        type: "integer"
+        format: "int64"
       response:
         type: "string"
         description: "Response data"

@@ -7,6 +7,7 @@ class RequestInfo:
 
 
 class ResponseInfo:
-    def __init__(self, id, response):
+    def __init__(self, id, status_code, response):
         self.id = id
+        self.status_code = status_code
         self.response = response
